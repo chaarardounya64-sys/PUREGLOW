@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PUREGLOW - Boutique Beauté</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <h1>PUREGLOW ✨</h1>
+
+  <button id="cartBtn">
+    🛒 Panier (<span id="cartCount">0</span>)
+  </button>
+</header>
+
+<nav>
+  <a href="#">Accueil</a>
+  <a href="#">Produits</a>
+</nav>
+
+<section class="hero">
+  <h2>Votre beauté commence ici 💖</h2>
+  <p>Produits naturels et maquillage de qualité</p>
+</section>
+
+<section class="products">
+
+  <div class="card">
+    <img src="images/product1.jpg" alt="produit">
+    <h3>Gommage Naturel</h3>
+    <span>49 DH</span>
+    <button onclick="addToCart('Gommage Naturel', 49)">Ajouter au panier</button>
+  </div>
+
+  <div class="card">
+    <img src="images/product2.jpg" alt="produit">
+    <h3>Kit Maquillage</h3>
+    <span>129 DH</span>
+    <button onclick="addToCart('Kit Maquillage', 129)">Ajouter au panier</button>
+  </div>
+
+  <div class="card">
+    <img src="images/product3.jpg" alt="produit">
+    <h3>Crème Hydratante</h3>
+    <span>39 DH</span>
+    <button onclick="addToCart('Crème Hydratante', 39)">Ajouter au panier</button>
+  </div>
+
+</section>
+
+<!-- PANIER -->
+<div id="cartBox" class="cartBox">
+  <h2>🛒 Votre Panier</h2>
+
+  <div id="cartItems"></div>
+
+  <h3>Total : <span id="total">0</span> DH</h3>
+
+  <button onclick="closeCart()">Fermer</button>
+</div>
+
+<footer>
+  <p>© 2026 PUREGLOW - Tous droits réservés</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
