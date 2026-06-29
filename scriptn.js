@@ -47,3 +47,9 @@ document.querySelectorAll(".add-btn").forEach(btn => {
 });
 
 });
+window.addEventListener("load", () => {
+    document.querySelectorAll(".card").forEach(card => {
+        card.style.opacity = "1";
+        card.style.transform = "none";
+    });
+});
