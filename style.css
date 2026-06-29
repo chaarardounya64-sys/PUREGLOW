@@ -99,3 +99,117 @@ border:none;
 padding:8px;
 border-radius:6px;
 }
+/* HERO */
+.hero{
+    background:linear-gradient(135deg,#ffd6e7,#fff5f8);
+    padding:80px 20px;
+    text-align:center;
+    border-radius:20px;
+    margin:20px;
+    animation:fadeIn 1s ease;
+}
+
+.hero h2{
+    font-size:40px;
+    color:#d63384;
+    animation:float 3s infinite ease-in-out;
+}
+
+.hero p{
+    font-size:18px;
+    color:#555;
+    margin:15px 0;
+}
+
+.shop-btn{
+    display:inline-block;
+    padding:12px 30px;
+    background:#ff6fa5;
+    color:#fff;
+    text-decoration:none;
+    border-radius:30px;
+    transition:.3s;
+}
+
+.shop-btn:hover{
+    background:#e91e63;
+    transform:scale(1.08);
+}
+
+/* RECHERCHE */
+.search{
+    text-align:center;
+    margin:30px 0;
+}
+
+.search input{
+    width:80%;
+    max-width:500px;
+    padding:14px;
+    border-radius:30px;
+    border:2px solid #ffb6c1;
+    outline:none;
+    font-size:16px;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-10px);
+    }
+}
+/* Animation du bouton */
+.shop-btn{
+    display:inline-block;
+    background:#d63384;
+    color:white;
+    padding:14px 30px;
+    border-radius:30px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.shop-btn:hover{
+    transform:scale(1.08);
+    background:#b0256d;
+}
+
+.pulse{
+    animation:pulse 1s;
+}
+
+@keyframes pulse{
+    0%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.08);
+    }
+    100%{
+        transform:scale(1);
+    }
+}
+
+.card{
+    transition:0.4s;
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.03);
+    box-shadow:0 15px 35px rgba(0,0,0,.2);
+}
