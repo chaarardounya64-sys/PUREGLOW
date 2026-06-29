@@ -239,8 +239,8 @@ border-radius:6px;
 }
 
 .logo img{
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -248,4 +248,16 @@ border-radius:6px;
 .logo img:hover{
     transform: scale(1.1);
     transition: 0.3s;
+}
+.logo img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.logo img:hover{
+    transform: scale(1.1);
 }
