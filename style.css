@@ -261,3 +261,8 @@ border-radius:6px;
 .logo img:hover{
     transform: scale(1.1);
 }
+.card{
+    display: block !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
