@@ -36,7 +36,7 @@ window.closeCart = function () {
     document.getElementById("cartBox").style.display = "none";
 };
 
-// BUTTONS
+// ADD BUTTONS EVENT
 document.querySelectorAll(".add-btn").forEach(btn => {
     btn.addEventListener("click", () => {
         const name = btn.dataset.name;
@@ -46,10 +46,4 @@ document.querySelectorAll(".add-btn").forEach(btn => {
     });
 });
 
-});
-window.addEventListener("load", () => {
-    document.querySelectorAll(".card").forEach(card => {
-        card.style.opacity = "1";
-        card.style.transform = "none";
-    });
 });
