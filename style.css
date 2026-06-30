@@ -223,3 +223,57 @@ grid-template-columns:1fr;
 }
 
 }
+.about,
+.contact{
+    background:white;
+    margin:30px;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.about h2,
+.contact h2{
+    text-align:center;
+    color:#d63384;
+    margin-bottom:20px;
+}
+
+.about p,
+.contact p{
+    text-align:center;
+    line-height:1.8;
+}
+
+.contact form{
+    max-width:500px;
+    margin:25px auto;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.contact input,
+.contact textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:16px;
+    box-sizing:border-box;
+}
+
+.contact button{
+    background:#d63384;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    transition:.3s;
+}
+
+.contact button:hover{
+    background:#b0256d;
+}
