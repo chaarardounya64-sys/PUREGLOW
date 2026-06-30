@@ -1,85 +1,96 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-let cart = [];
-let total = 0;
+  let cart = [];
+  let total = 0;
 
-// ADD TO CART
-function addToCart(name, price) {
+  const cards = document.querySelectorAll(".card");
+  const filterButtons = document.querySelectorAll(".filters button");
+
+  // ADD TO CART
+  function addToCart(name, price) {
     cart.push({ name, price });
     total += price;
 
     document.getElementById("cartCount").innerText = cart.length;
     updateCart();
-}
+  }
 
-// UPDATE CART
-function updateCart() {
+  // UPDATE CART
+  function updateCart() {
     const cartItems = document.getElementById("cartItems");
     cartItems.innerHTML = "";
 
     cart.forEach(item => {
-        const p = document.createElement("p");
-        p.textContent = `${item.name} - ${item.price} DH`;
-        cartItems.appendChild(p);
+      const p = document.createElement("p");
+      p.textContent = `${item.name} - ${item.price} DH`;
+      cartItems.appendChild(p);
     });
 
     document.getElementById("total").innerText = total;
-}
+  }
 
-// OUVRIR LE PANIER
-document.getElementById("cartBtn").onclick = () => {
+  // OPEN CART
+  document.getElementById("cartBtn").onclick = () => {
     document.getElementById("cartBox").style.display = "block";
-};
+  };
 
-// FERMER LE PANIER
-window.closeCart = () => {
+  // CLOSE CART
+  window.closeCart = () => {
     document.getElementById("cartBox").style.display = "none";
-};
+  };
 
-// BOUTONS AJOUTER AU PANIER
-document.querySelectorAll(".add-btn").forEach(btn => {
+  // ADD TO CART BUTTONS
+  document.querySelectorAll(".add-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-        addToCart(btn.dataset.name, Number(btn.dataset.price));
+      addToCart(btn.dataset.name, Number(btn.dataset.price));
     });
-});
+  });
 
-// RECHERCHE
-const search = document.getElementById("searchInput");
-
-search.addEventListener("keyup", function () {
+  // SEARCH
+  document.getElementById("searchInput").addEventListener("keyup", function () {
 
     const value = this.value.toLowerCase();
 
-    document.querySelectorAll(".card").forEach(card => {
+    cards.forEach(card => {
+      const title = card.querySelector("h3").textContent.toLowerCase();
 
-        const title = card.querySelector("h3").textContent.toLowerCase();
-
-        if (title.includes(value)) {
-            card.style.display = "block";
-        } else {
-            card.style.display = "none";
-        }
-
+      card.style.display = title.includes(value) ? "block" : "none";
     });
 
-});
+  });
 
-// ANIMATION SIMPLE
-const cards = document.querySelectorAll(".card");
+  // FILTER
+  filterButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
 
-cards.forEach((card, index) => {
+      const category = btn.dataset.category;
+
+      cards.forEach(card => {
+
+        if (category === "all") {
+          card.style.display = "block";
+        } else {
+          card.style.display =
+            card.dataset.category === category ? "block" : "none";
+        }
+
+      });
+
+    });
+  });
+
+  // ANIMATION
+  cards.forEach((card, index) => {
 
     card.style.opacity = "0";
     card.style.transform = "translateY(30px)";
 
     setTimeout(() => {
+      card.style.opacity = "1";
+      card.style.transform = "translateY(0)";
+      card.style.transition = "0.6s";
+    }, index * 120);
 
-        card.style.opacity = "1";
-        card.style.transform = "translateY(0)";
-        card.style.transition = "0.6s";
-
-    }, index * 150);
-
-});
+  });
 
 });
