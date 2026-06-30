@@ -602,7 +602,36 @@ Notre mission est de rendre les soins de beauté accessibles à tous avec des pr
    WhatsApp
 </a>
 
-<script src="scriptn.js"></script>
+<!-- LIGHTBOX (image popup) -->
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img id="lightboxImg">
+</div>
+
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+
+  document.querySelectorAll(".card img").forEach(img=>{
+    img.addEventListener("click",()=>{
+      document.getElementById("lightbox").style.display="flex";
+      document.getElementById("lightboxImg").src = img.src;
+    });
+  });
+
+  const closeBtn = document.querySelector(".lightbox .close");
+
+  closeBtn.addEventListener("click",()=>{
+    document.getElementById("lightbox").style.display="none";
+  });
+
+  document.getElementById("lightbox").addEventListener("click",function(e){
+    if(e.target === this){
+      this.style.display="none";
+    }
+  });
+
+});
+</script>
 
 </body>
 </html>
