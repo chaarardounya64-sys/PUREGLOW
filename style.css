@@ -144,8 +144,11 @@ nav a:hover{
 }
 
 .card img{
-    width:100%;
-    border-radius:15px;
+width:100%;
+height:260px;
+object-fit:cover;
+border-radius:15px;
+transition:transform .4s ease;
 }
 
 .card h3{
@@ -279,4 +282,94 @@ grid-template-columns:1fr;
 }
 html{
     scroll-behavior:smooth;
+}
+.whatsapp-btn{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: white;
+  padding: 12px 15px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 999;
+}
+
+.whatsapp-btn:hover{
+  background: #1ebe5d;
+}
+/* ===== Animation des cartes ===== */
+
+.card{
+transition:transform .3s ease, box-shadow .3s ease;
+overflow:hidden;
+}
+
+.card:hover{
+transform:translateY(-8px) scale(1.03);
+box-shadow:0 12px 25px rgba(0,0,0,.15);
+}
+
+/* Zoom image */
+
+.card img{
+transition:transform .4s ease;
+}
+
+.card:hover img{
+transform:scale(1.08);
+}
+
+/* Bouton */
+
+.add-btn{
+transition:all .3s ease;
+}
+
+.add-btn:hover{
+transform:scale(1.05);
+}
+
+.add-btn:active{
+transform:scale(.95);
+}
+
+/* Bouton WhatsApp */
+
+.whatsapp-btn{
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.08);
+}
+
+100%{
+transform:scale(1);
+}
+}
+
+/* Apparition des cartes */
+
+.card{
+animation:fadeUp .7s ease;
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
