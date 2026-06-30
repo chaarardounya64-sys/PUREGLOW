@@ -740,4 +740,10 @@ to{
 opacity:1;
 transform:translateY(0);
 }
+}   
+
+#packs .card img{
+height:380px;
+object-fit:cover;
 }
+
