@@ -51,6 +51,8 @@ Acheter maintenant
   <button data-category="maquillage">Maquillage</button>
   <button data-category="gommages">Gommages</button>
   <button data-category="sacs">Sacs</button>
+  <button data-category="soin">Soins</button>
+  <button data-category="packs">Packs</button>
 </div>
 
 <input
@@ -615,67 +617,7 @@ Notre mission est de rendre les soins de beauté accessibles à tous avec des pr
   <img id="lightboxImg">
 </div>
 
-<script>
-window.addEventListener("DOMContentLoaded", () => {
+<script src="script.js"></script>
 
-  // LIGHTBOX
-  document.querySelectorAll(".card img").forEach(img=>{
-    img.addEventListener("click",()=>{
-      document.getElementById("lightbox").style.display="flex";
-      document.getElementById("lightboxImg").src = img.src;
-    });
-  });
-
-  const closeBtn = document.querySelector(".lightbox .close");
-
-  closeBtn.addEventListener("click",()=>{
-    document.getElementById("lightbox").style.display="none";
-  });
-
-  document.getElementById("lightbox").addEventListener("click",function(e){
-    if(e.target === this){
-      this.style.display="none";
-    }
-  });
-
-  // CART
-  let cart = [];
-  let total = 0;
-
-  function addToCart(name, price) {
-    cart.push({ name, price });
-    total += price;
-
-    document.getElementById("cartCount").innerText = cart.length;
-    updateCart();
-  }
-
-  function updateCart() {
-    const cartItems = document.getElementById("cartItems");
-    cartItems.innerHTML = "";
-
-    cart.forEach(item => {
-      const p = document.createElement("p");
-      p.textContent = `${item.name} - ${item.price} DH`;
-      cartItems.appendChild(p);
-    });
-
-    document.getElementById("total").innerText = total;
-  }
-
-  document.getElementById("cartBtn").onclick = () => {
-    document.getElementById("cartBox").style.display = "block";
-  };
-
-  window.closeCart = () => {
-    document.getElementById("cartBox").style.display = "none";
-  };
-
-  document.querySelectorAll(".add-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      addToCart(btn.dataset.name, Number(btn.dataset.price));
-    });
-  });
-
-});
-</script>
+</body>
+</html>
