@@ -279,3 +279,32 @@ nav a:hover{
   color:white;
   cursor:pointer;
 }
+
+.filters{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+
+.filters button{
+    background:#ff4f9a;
+    color:white;
+    border:none;
+    padding:10px 22px;
+    border-radius:30px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.filters button:hover{
+    background:#e63b86;
+    transform:scale(1.05);
+}
+
+.filters button.active{
+    background:#c81d6f;
+}
