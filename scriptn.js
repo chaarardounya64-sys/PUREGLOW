@@ -14,11 +14,11 @@ function addToCart(name, price) {
 
 // UPDATE CART
 function updateCart() {
-    let cartItems = document.getElementById("cartItems");
+    const cartItems = document.getElementById("cartItems");
     cartItems.innerHTML = "";
 
     cart.forEach(item => {
-        let p = document.createElement("p");
+        const p = document.createElement("p");
         p.textContent = `${item.name} - ${item.price} DH`;
         cartItems.appendChild(p);
     });
@@ -26,24 +26,60 @@ function updateCart() {
     document.getElementById("total").innerText = total;
 }
 
-// OPEN CART
+// OUVRIR LE PANIER
 document.getElementById("cartBtn").onclick = () => {
     document.getElementById("cartBox").style.display = "block";
 };
 
-// CLOSE CART
-window.closeCart = function () {
+// FERMER LE PANIER
+window.closeCart = () => {
     document.getElementById("cartBox").style.display = "none";
 };
 
-// ADD BUTTONS EVENT
+// BOUTONS AJOUTER AU PANIER
 document.querySelectorAll(".add-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-        const name = btn.dataset.name;
-        const price = parseFloat(btn.dataset.price);
-
-        addToCart(name, price);
+        addToCart(btn.dataset.name, Number(btn.dataset.price));
     });
+});
+
+// RECHERCHE
+const search = document.getElementById("searchInput");
+
+search.addEventListener("keyup", function () {
+
+    const value = this.value.toLowerCase();
+
+    document.querySelectorAll(".card").forEach(card => {
+
+        const title = card.querySelector("h3").textContent.toLowerCase();
+
+        if (title.includes(value)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+
+    });
+
+});
+
+// ANIMATION SIMPLE
+const cards = document.querySelectorAll(".card");
+
+cards.forEach((card, index) => {
+
+    card.style.opacity = "0";
+    card.style.transform = "translateY(30px)";
+
+    setTimeout(() => {
+
+        card.style.opacity = "1";
+        card.style.transform = "translateY(0)";
+        card.style.transition = "0.6s";
+
+    }, index * 150);
+
 });
 
 });
