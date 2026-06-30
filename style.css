@@ -277,3 +277,6 @@ grid-template-columns:1fr;
 .contact button:hover{
     background:#b0256d;
 }
+html{
+    scroll-behavior:smooth;
+}
