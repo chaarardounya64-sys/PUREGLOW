@@ -308,3 +308,17 @@ nav a:hover{
 .filters button.active{
     background:#c81d6f;
 }
+
+.remove-btn{
+  background:#ff4d4d;
+  color:white;
+  border:none;
+  padding:5px 10px;
+  border-radius:6px;
+  cursor:pointer;
+  width:auto !important;
+}
+
+.remove-btn:hover{
+  background:#cc0000;
+}
