@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const cards = document.querySelectorAll(".card");
   const filterButtons = document.querySelectorAll(".filters button");
-document.querySelector('.filters button[data-category="all"]').classList.add("active");
+
+  document.querySelector('.filters button[data-category="all"]').classList.add("active");
 
   // ADD TO CART
   function addToCart(name, price) {
@@ -21,14 +22,33 @@ document.querySelector('.filters button[data-category="all"]').classList.add("ac
     const cartItems = document.getElementById("cartItems");
     cartItems.innerHTML = "";
 
-    cart.forEach(item => {
-      const p = document.createElement("p");
-      p.textContent = `${item.name} - ${item.price} DH`;
-      cartItems.appendChild(p);
+    cart.forEach((item, index) => {
+      const div = document.createElement("div");
+
+      div.innerHTML = `
+        <span>${item.name} - ${item.price} DH</span>
+        <button class="remove-btn" onclick="removeItem(${index})">❌</button>
+      `;
+
+      div.style.display = "flex";
+      div.style.justifyContent = "space-between";
+      div.style.alignItems = "center";
+      div.style.marginBottom = "10px";
+
+      cartItems.appendChild(div);
     });
 
     document.getElementById("total").innerText = total;
   }
+
+  // REMOVE ITEM
+  window.removeItem = (index) => {
+    total -= cart[index].price;
+    cart.splice(index, 1);
+
+    document.getElementById("cartCount").innerText = cart.length;
+    updateCart();
+  };
 
   // OPEN CART
   document.getElementById("cartBtn").onclick = () => {
@@ -60,26 +80,26 @@ document.querySelector('.filters button[data-category="all"]').classList.add("ac
 
   });
 
-// FILTER
-filterButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
+  // FILTER
+  filterButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
 
-    filterButtons.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
+      filterButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
 
-    const category = btn.dataset.category;
+      const category = btn.dataset.category;
 
-    cards.forEach(card => {
-      if (category === "all") {
-        card.style.display = "block";
-      } else {
-        card.style.display =
-          card.dataset.category === category ? "block" : "none";
-      }
+      cards.forEach(card => {
+        if (category === "all") {
+          card.style.display = "block";
+        } else {
+          card.style.display =
+            card.dataset.category === category ? "block" : "none";
+        }
+      });
+
     });
-
   });
-});
 
   // ANIMATION
   cards.forEach((card, index) => {
