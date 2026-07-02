@@ -176,4 +176,13 @@ document.getElementById("clearCartBtn").addEventListener("click", () => {
 
 });
 
+  // SPLASH SCREEN
+window.addEventListener("load", () => {
+
+  setTimeout(() => {
+    document.getElementById("loader").classList.add("hide");
+  }, 2000);
+
+});
+
 });
