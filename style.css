@@ -322,3 +322,69 @@ nav a:hover{
 .remove-btn:hover{
   background:#cc0000;
 }
+
+/* ===== SPLASH SCREEN ===== */
+
+#loader{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(135deg,#ffdbe9,#fff6f3);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:99999;
+transition:opacity .8s ease,visibility .8s ease;
+}
+
+#loader.hide{
+opacity:0;
+visibility:hidden;
+}
+
+.loader-content{
+text-align:center;
+animation:zoomIn 1s ease;
+}
+
+.loader-content img{
+width:120px;
+margin-bottom:20px;
+animation:float 2s infinite ease-in-out;
+}
+
+.loader-content h1{
+font-size:40px;
+color:#d63384;
+margin:10px 0;
+}
+
+.loader-content p{
+font-size:18px;
+color:#555;
+}
+
+@keyframes zoomIn{
+from{
+opacity:0;
+transform:scale(.7);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+
+@keyframes float{
+0%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-10px);
+}
+100%{
+transform:translateY(0);
+}
+}
