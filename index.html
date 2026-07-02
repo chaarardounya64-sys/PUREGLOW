@@ -582,20 +582,21 @@ Notre mission est de rendre les soins de beauté accessibles à tous avec des pr
 
 <!-- PANIER -->
 
-<div id="cartBox" class="cartBox">
+<div id="cartItems"></div>
 
-    <h2> Votre Panier</h2>
+<h3>
+Total :
+<span id="total">0</span> DH
+</h3>
 
-    <div id="cartItems"></div>
+<button id="orderBtn">📲 Commander sur WhatsApp</button>
 
-    <h3>
-        Total :
-        <span id="total">0</span> DH
-    </h3>
+<button id="clearCartBtn">🗑️ Vider le panier</button>
 
-    <button onclick="closeCart()">
-        Fermer
-    </button>
+<button onclick="closeCart()">
+Fermer
+</button>
+   
 
 </div>
 
