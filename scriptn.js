@@ -139,4 +139,41 @@ lightbox.addEventListener("click", (e) => {
   }
 });
 
+  // COMMANDER SUR WHATSAPP
+document.getElementById("orderBtn").addEventListener("click", () => {
+
+  if (cart.length === 0) {
+    alert("Votre panier est vide !");
+    return;
+  }
+
+  let message = "🌸 Bonjour PUREGLOW%0A%0A";
+  message += "Je souhaite commander :%0A%0A";
+
+  cart.forEach(item => {
+    message += `- ${item.name} : ${item.price} DH%0A`;
+  });
+
+  message += `%0ATotal : ${total} DH%0A%0A`;
+  message += "Nom : %0A";
+  message += "Téléphone : %0A";
+  message += "Ville : %0A";
+  message += "Adresse : %0A";
+
+  window.open(`https://wa.me/212698322466?text=${message}`, "_blank");
+
+});
+
+
+// VIDER LE PANIER
+document.getElementById("clearCartBtn").addEventListener("click", () => {
+
+  cart = [];
+  total = 0;
+
+  document.getElementById("cartCount").innerText = "0";
+  updateCart();
+
+});
+
 });
