@@ -1,179 +1,627 @@
-document.addEventListener("DOMContentLoaded", () => {
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PUREGLOW - Boutique Beauté</title>
 
-  let cart = [];
-  let total = 0;
+<link rel="stylesheet" href="style.css">
+</head>
 
-  const cards = document.querySelectorAll(".card");
-  const filterButtons = document.querySelectorAll(".filters button");
+<body>
 
-  document.querySelector('.filters button[data-category="all"]').classList.add("active");
+<header>
 
-  // ADD TO CART
-  function addToCart(name, price) {
-    cart.push({ name, price });
-    total += price;
+<div class="logo">
+<img src="logo.png" alt="PUREGLOW Logo">
+<h1>PUREGLOW </h1>
+</div>
 
-    document.getElementById("cartCount").innerText = cart.length;
-    updateCart();
-  }
+<button id="cartBtn">
+ Panier (<span id="cartCount">0</span>)
+</button>
 
-  // UPDATE CART
-  function updateCart() {
-    const cartItems = document.getElementById("cartItems");
-    cartItems.innerHTML = "";
+</header>
 
-    cart.forEach((item, index) => {
-      const div = document.createElement("div");
+<nav>
+    <a href="#accueil">Accueil</a>
+    <a href="#products">Produits</a>
+    <a href="#about">À propos</a>
+    <a href="#contact">Contact</a>
+</nav>
 
-      div.innerHTML = `
-        <span>${item.name} - ${item.price} DH</span>
-        <button class="remove-btn" onclick="removeItem(${index})">❌</button>
-      `;
+<section id="accueil" class="hero">
 
-      div.style.display = "flex";
-      div.style.justifyContent = "space-between";
-      div.style.alignItems = "center";
-      div.style.marginBottom = "10px";
+<h2>Découvrez la beauté naturelle </h2>
 
-      cartItems.appendChild(div);
-    });
+<p>
+Des gommages artisanaux et des produits de beauté de haute qualité.
+</p>
 
-    document.getElementById("total").innerText = total;
-  }
+<a href="#products" class="shop-btn">
+Acheter maintenant
+</a>
 
-  // REMOVE ITEM
-  window.removeItem = (index) => {
-    total -= cart[index].price;
-    cart.splice(index, 1);
+</section>
 
-    document.getElementById("cartCount").innerText = cart.length;
-    updateCart();
-  };
+<section class="search">
 
-  // OPEN CART
-  document.getElementById("cartBtn").onclick = () => {
-    document.getElementById("cartBox").style.display = "block";
-  };
+<div class="filters">
+  <button data-category="all">Tous</button>
+  <button data-category="maquillage">Maquillage</button>
+  <button data-category="gommages">Gommages</button>
+  <button data-category="sacs">Sacs</button>
+  <button data-category="soin">Soins</button>
+  <button data-category="packs">Packs</button>
+</div>
 
-  // CLOSE CART
-  window.closeCart = () => {
-    document.getElementById("cartBox").style.display = "none";
-  };
+<input
+type="text"
+id="searchInput"
+placeholder=" Rechercher un produit...">
 
-  // ADD TO CART BUTTONS
-  document.querySelectorAll(".add-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      addToCart(btn.dataset.name, Number(btn.dataset.price));
-    });
-  });
+</section>
 
-  // SEARCH
-  document.getElementById("searchInput").addEventListener("keyup", function () {
+<section class="products" id="products">
 
-    const value = this.value.toLowerCase();
+<!-- Produit 1 -->
 
-    cards.forEach(card => {
-      const title = card.querySelector("h3").textContent.toLowerCase();
+<div class="card" data-category="gommages">
 
-      card.style.display = title.includes(value) ? "block" : "none";
-    });
+<img src="Argan.png" alt="Argan">
 
-  });
+<h3>Gommage Argan</h3>
 
-  // FILTER
-  filterButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
+<p>49 DH</p>
 
-      filterButtons.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
+<button class="add-btn"
+data-name="Gommage Argan"
+data-price="49">
+Ajouter au panier
+</button>
 
-      const category = btn.dataset.category;
+</div>
 
-      cards.forEach(card => {
-        if (category === "all") {
-          card.style.display = "block";
-        } else {
-          card.style.display =
-            card.dataset.category === category ? "block" : "none";
-        }
-      });
+<!-- Produit 2 -->
 
-    });
-  });
+<div class="card" data-category="gommages">
 
-  // ANIMATION
-  cards.forEach((card, index) => {
+<img src="Charcoal.png" alt="Charcoal">
 
-    card.style.opacity = "0";
-    card.style.transform = "translateY(30px)";
+<h3>Gommage Charbon</h3>
 
-    setTimeout(() => {
-      card.style.opacity = "1";
-      card.style.transform = "translateY(0)";
-      card.style.transition = "0.6s";
-    }, index * 120);
+<p>59 DH</p>
 
-  });
+<button class="add-btn"
+data-name="Gommage Charbon"
+data-price="59">
+Ajouter au panier
+</button>
 
-  // LIGHTBOX
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightboxImg");
-const closeBtn = document.querySelector(".lightbox .close");
+</div>
 
-document.querySelectorAll(".card img").forEach(img => {
-  img.style.cursor = "pointer";
+<!-- Produit 3 -->
 
-  img.addEventListener("click", () => {
-    lightbox.style.display = "flex";
-    lightboxImg.src = img.src;
-  });
-});
+<div class="card" data-category="gommages">
 
-closeBtn.addEventListener("click", () => {
-  lightbox.style.display = "none";
-});
+<img src="Coffee.png" alt="Coffee">
 
-lightbox.addEventListener("click", (e) => {
-  if (e.target === lightbox) {
-    lightbox.style.display = "none";
-  }
-});
+<h3>Gommage Café</h3>
 
-  // COMMANDER SUR WHATSAPP
-document.getElementById("orderBtn").addEventListener("click", () => {
+<p>55 DH</p>
 
-  if (cart.length === 0) {
-    alert("Votre panier est vide !");
-    return;
-  }
+<button class="add-btn"
+data-name="Gommage Café"
+data-price="55">
+Ajouter au panier
+</button>
 
-  let message = "🌸 Bonjour PUREGLOW%0A%0A";
-  message += "Je souhaite commander :%0A%0A";
+</div>
 
-  cart.forEach(item => {
-    message += `- ${item.name} : ${item.price} DH%0A`;
-  });
+<!-- Produit 4 -->
 
-  message += `%0ATotal : ${total} DH%0A%0A`;
-  message += "Nom : %0A";
-  message += "Téléphone : %0A";
-  message += "Ville : %0A";
-  message += "Adresse : %0A";
+<div class="card" data-category="gommages">
 
-  window.open(`https://wa.me/212698322466?text=${message}`, "_blank");
+<img src="GreenTea.png" alt="GreenTea">
 
-});
+<h3>Gommage Thé Vert</h3>
+
+<p>52 DH</p>
+
+<button class="add-btn"
+data-name="Gommage Thé Vert"
+data-price="52">
+Ajouter au panier
+</button>
+
+</div>
+
+<!-- Produit 5 -->
+
+<div class="card" data-category="gommages">
+
+    <img src="Rose.png" alt="Rose">
+
+    <h3>Gommage Rose</h3>
+
+    <p>50 DH</p>
+
+    <button class="add-btn"
+    data-name="Gommage Rose"
+    data-price="50">
+    Ajouter au panier
+    </button>
+
+</div>
+
+<!-- Produit 6 -->
+
+<div class="card" data-category="gommages">
+
+    <img src="Turmeric.png" alt="Turmeric">
+
+    <h3>Gommage Curcuma</h3>
+
+    <p>58 DH</p>
+
+    <button class="add-btn"
+    data-name="Gommage Curcuma"
+    data-price="58">
+    Ajouter au panier
+    </button>
+
+</div>
+
+<!-- Produit 7 -->
+
+<div class="card" data-category="gommages">
+
+    <img src="ChiaSeed.png" alt="ChiaSeed">
+
+    <h3>Gommage Chia Seed</h3>
+
+    <p>65 DH</p>
+
+    <button class="add-btn"
+    data-name="Gommage Chia Seed"
+    data-price="65">
+    Ajouter au panier
+    </button>
+
+</div>
+
+<!-- Produit 8 -->
+
+<div class="card" data-category="gommages">
+
+    <img src="Lavender.png" alt="Lavender">
+
+    <h3>Gommage Lavande</h3>
+
+    <p>60 DH</p>
+
+    <button class="add-btn"
+    data-name="Gommage Lavande"
+    data-price="60">
+    Ajouter au panier
+    </button>
+
+</div>
+
+<div class="card" data-category="maquillage">
+  <img src="CrayonsLevres.png" alt="Crayons Lèvres">
+  <h3>Crayons Lèvres</h3>
+  <p>35 DH</p>
+  <button class="add-btn" data-name="Crayons Lèvres" data-price="35">Ajouter au panier</button>
+</div>
+
+<div class="card" data-category="maquillage">
+  <img src="poudre.png" alt="Poudre">
+  <h3>Poudre</h3>
+  <p>70 DH</p>
+  <button class="add-btn" data-name="Poudre" data-price="70">Ajouter au panier</button>
+</div>
+
+<div class="card" data-category="maquillage">
+  <img src="Corectteur.png" alt="Correcteur">
+  <h3>Correcteur</h3>
+  <p>60 DH</p>
+  <button class="add-btn" data-name="Correcteur" data-price="60">
+    Ajouter au panier
+  </button>
+</div>
+
+<div class="card" data-category="maquillage">
+  <img src="SprayFixateur.png" alt="Spray Fixateur">
+  <h3>Spray Fixateur</h3>
+  <p>65 DH</p>
+  <button class="add-btn" data-name="Spray Fixateur" data-price="65">Ajouter au panier</button>
+</div>
+
+<div class="card" data-category="maquillage">
+  <img src="Pinceaux.png" alt="Pinceaux">
+  <h3>Pinceaux</h3>
+  <p>80 DH</p>
+  <button class="add-btn" data-name="Pinceaux" data-price="80">Ajouter au panier</button>
+</div>
+
+<div class="card" data-category="maquillage">
+  <img src="Mascara.png" alt="Mascara">
+  <h3>Mascara</h3>
+  <p>55 DH</p>
+  <button class="add-btn" data-name="Mascara" data-price="55">Ajouter au panier</button>
+</div>
+
+<div class="card" data-category="maquillage">
+  <img src="PaletteBlush.png" alt="Palette Blush">
+  <h3>Palette Blush</h3>
+  <p>90 DH</p>
+  <button class="add-btn" data-name="Palette Blush" data-price="90">Ajouter au panier</button>
+</div>
+
+<div class="card" data-category="maquillage">
+  <img src="PeletteOmbre.png" alt="Palette Ombre">
+  <h3>Palette Ombre</h3>
+  <p>120 DH</p>
+  <button class="add-btn" data-name="Palette Ombre" data-price="120">
+    Ajouter au panier
+  </button>
+</div>
+
+<div class="card" data-category="maquillage">
+  <img src="GelSourcils.png" alt="Gel Sourcils">
+  <h3>Gel Sourcils</h3>
+  <p>45 DH</p>
+  <button class="add-btn" data-name="Gel Sourcils" data-price="45">Ajouter au panier</button>
+</div>
+
+<div class="card" data-category="maquillage">
+  <img src="BrillantLevre.png" alt="Brillant Lèvres">
+  <h3>Brillant Lèvres</h3>
+  <p>40 DH</p>
+  <button class="add-btn" data-name="Brillant Lèvres" data-price="40">Ajouter au panier</button>
+</div>
+
+<div class="card" data-category="maquillage">
+<img src="CosmetiqueLevres.png">
+  <h3>Cosmétique Lèvres</h3>
+  <p>55 DH</p>
+  <button class="add-btn" data-name="Cosmétique Lèvres" data-price="55">
+    Ajouter au panier
+  </button>
+</div>
+
+<div class="card" data-category="sacs">
+
+  <img src="SacBlanc.png" alt="SacBlanc">
+
+  <h3>Sac Blanc</h3>
+
+  <p>180 DH</p>
+
+  <button class="add-btn"
+  data-name="Sac Blanc"
+  data-price="180">
+  Ajouter au panier
+  </button>
+
+</div>
 
 
-// VIDER LE PANIER
-document.getElementById("clearCartBtn").addEventListener("click", () => {
+<div class="card" data-category="sacs">
 
-  cart = [];
-  total = 0;
+  <img src="SacBlancRouge.png" alt="SacBlancRouge">
 
-  document.getElementById("cartCount").innerText = "0";
-  updateCart();
+  <h3>Sac Blanc Rouge</h3>
 
-});
+  <p>200 DH</p>
 
-});
+  <button class="add-btn"
+  data-name="Sac Blanc Rouge"
+  data-price="200">
+  Ajouter au panier
+  </button>
+
+</div>
+
+
+<div class="card" data-category="sacs">
+
+  <img src="SacBlancNoir.png" alt="SacBlancNoir">
+
+  <h3>Sac Blanc Noir</h3>
+
+  <p>200 DH</p>
+
+  <button class="add-btn"
+  data-name="Sac Blanc Noir"
+  data-price="200">
+  Ajouter au panier
+  </button>
+
+</div>
+
+
+<div class="card" data-category="sacs">
+
+  <img src="SacLuxe.png" alt="SacLuxe">
+
+  <h3>Sac Luxe</h3>
+
+  <p>350 DH</p>
+
+  <button class="add-btn"
+  data-name="Sac Luxe"
+  data-price="350">
+  Ajouter au panier
+  </button>
+
+</div>
+
+
+<div class="card" data-category="sacs">
+
+  <img src="SacNoir.png" alt="SacNoir">
+
+  <h3>Sac Noir</h3>
+
+  <p>170 DH</p>
+
+  <button class="add-btn"
+  data-name="Sac Noir"
+  data-price="170">
+  Ajouter au panier
+  </button>
+
+</div>
+
+
+<div class="card" data-category="sacs">
+
+  <img src="SacNoirBlanc.png" alt="SacNoirBlanc">
+
+  <h3>Sac Noir Blanc</h3>
+
+  <p>190 DH</p>
+
+  <button class="add-btn"
+  data-name="Sac Noir Blanc"
+  data-price="190">
+  Ajouter au panier
+  </button>
+
+</div>
+
+
+<div class="card" data-category="sacs">
+
+  <img src="SacRouge.png" alt="SacRouge">
+
+  <h3>Sac Rouge</h3>
+
+  <p>180 DH</p>
+
+  <button class="add-btn"
+  data-name="Sac Rouge"
+  data-price="180">
+  Ajouter au panier
+  </button>
+
+</div>
+
+
+<div class="card" data-category="sacs">
+
+  <img src="SacTigre.png" alt="SacTigre">
+
+  <h3>Sac Tigre</h3>
+
+  <p>220 DH</p>
+
+  <button class="add-btn"
+  data-name="Sac Tigre"
+  data-price="220">
+  Ajouter au panier
+  </button>
+
+</div>
+
+<div class="card" data-category="soin">
+  <img src="Eos1.png" alt="EOS Fresh & Cozy">
+  <h3>EOS Fresh & Cozy</h3>
+  <p>Lotion hydratante au parfum frais et réconfortant. Nourrit intensément la peau et lui apporte une douceur durable.</p>
+  <p>149 DH</p>
+  <button class="add-btn"
+    data-name="EOS Fresh & Cozy"
+    data-price="149">
+    Ajouter au panier
+  </button>
+</div>
+
+<div class="card" data-category="soin">
+  <img src="Eos2.png" alt="EOS Strawberry Dream">
+  <h3>EOS Strawberry Dream</h3>
+  <p>Une lotion au délicieux parfum de fraise qui hydrate la peau et la laisse douce, lisse et délicatement parfumée.</p>
+  <p>149 DH</p>
+  <button class="add-btn"
+    data-name="EOS Strawberry Dream"
+    data-price="149">
+    Ajouter au panier
+  </button>
+</div>
+
+<div class="card" data-category="soin">
+  <img src="Eos3.png" alt="EOS Vanilla Cashmere">
+  <h3>EOS Vanilla Cashmere</h3>
+  <p>Une crème nourrissante au parfum de vanille et de cachemire pour une peau soyeuse, souple et intensément hydratée.</p>
+  <p>159 DH</p>
+  <button class="add-btn"
+    data-name="EOS Vanilla Cashmere"
+    data-price="159">
+    Ajouter au panier
+  </button>
+</div>
+
+<div class="card" data-category="soin">
+  <img src="Eos4.png" alt="EOS Vanilla Bliss">
+  <h3>EOS Vanilla Bliss</h3>
+  <p>Un soin hydratant à la douce fragrance de vanille qui procure confort, douceur et une hydratation longue durée.</p>
+  <p>159 DH</p>
+  <button class="add-btn"
+    data-name="EOS Vanilla Bliss"
+    data-price="159">
+    Ajouter au panier
+  </button>
+</div>
+
+<div class="card" data-category="soin">
+  <img src="Eos5.png" alt="EOS Lavender">
+  <h3>EOS Lavender</h3>
+  <p>Une lotion hydratante au parfum apaisant de lavande. Elle nourrit intensément la peau et procure une sensation de fraîcheur et de relaxation.</p>
+  <p>149 DH</p>
+  <button class="add-btn"
+    data-name="EOS Lavender"
+    data-price="149">
+    Ajouter au panier
+  </button>
+</div>
+
+</section>
+
+<section class="packs" id="packs">
+
+<h2> Les Packs</h2>
+
+<div class="card" data-category="packs">
+  <img src="Pack1.png" alt="Lavender Glow Set">
+  <h3>Lavender Glow Set</h3>
+  <p>Un coffret complet pour des lèvres douces, brillantes et un style élégant au quotidien.</p>
+  <strong>199 DH</strong><br><br>
+  <button class="add-btn" data-name="Lavender Glow Set" data-price="199">
+    Ajouter au panier
+  </button>
+</div>
+
+<div class="card" data-category="packs">
+  <img src="Pack2.png" alt="Pink Glam Set">
+  <h3>Pink Glam Set</h3>
+  <p>Le trio parfait pour un maquillage lumineux avec un regard intense et des lèvres éclatantes.</p>
+  <strong>179 DH</strong><br><br>
+  <button class="add-btn" data-name="Pink Glam Set" data-price="179">
+    Ajouter au panier
+  </button>
+</div>
+
+<div class="card" data-category="packs">
+  <img src="Pack3.png" alt="Wild Chic Set">
+  <h3>Wild Chic Set</h3>
+  <p>Le pack idéal pour un look chic et une tenue parfaite du maquillage toute la journée.</p>
+  <strong>229 DH</strong><br><br>
+  <button class="add-btn" data-name="Wild Chic Set" data-price="229">
+    Ajouter au panier
+  </button>
+</div>
+
+<div class="card" data-category="packs">
+  <img src="Pack4.png" alt="Red Elegance Set">
+  <h3>Red Elegance Set</h3>
+  <p>Prenez soin de vos sourcils et de votre peau avec une touche d'élégance et de raffinement.</p>
+  <strong>189 DH</strong><br><br>
+  <button class="add-btn" data-name="Red Elegance Set" data-price="189">
+    Ajouter au panier
+  </button>
+</div>
+
+<div class="card" data-category="packs">
+  <img src="Pack5.png" alt="Rose Beauty Set">
+  <h3>Rose Beauty Set</h3>
+  <p>Un rituel beauté complet pour une peau douce, un teint parfait et une finition professionnelle.</p>
+  <strong>209 DH</strong><br><br>
+  <button class="add-btn" data-name="Rose Beauty Set" data-price="209">
+    Ajouter au panier
+  </button>
+</div>
+
+</section>
+
+<section id="about" class="about">
+
+<h2>À propos de PUREGLOW</h2>
+
+<p>
+Bienvenue chez <strong>PUREGLOW</strong>, votre boutique spécialisée dans les gommages artisanaux et les produits de beauté naturels.
+Nous sélectionnons des ingrédients de qualité pour offrir à votre peau douceur, éclat et fraîcheur.
+Notre mission est de rendre les soins de beauté accessibles à tous avec des produits efficaces et à des prix abordables.
+</p>
+
+</section>
+
+<section id="contact" class="contact">
+
+<h2>Contact</h2>
+
+<p> Téléphone : +212 6 98 32 24 66</p>
+
+<p> Email : contact@pureglow.ma</p>
+
+<p> Maroc</p>
+
+<form>
+
+<input type="text" placeholder="Votre nom" required>
+
+<input type="email" placeholder="Votre email" required>
+
+<textarea placeholder="Votre message" rows="5" required></textarea>
+
+<button type="submit">Envoyer</button>
+
+</form>
+
+</section>
+
+<!-- PANIER -->
+
+<div id="cartBox" class="cartBox">
+
+    <h2> Votre Panier</h2>
+
+    <div id="cartItems"></div>
+
+<h3>
+Total :
+<span id="total">0</span> DH
+</h3>
+
+<button id="orderBtn">📲 Commander sur WhatsApp</button>
+
+<button id="clearCartBtn">🗑️ Vider le panier</button>
+
+<button onclick="closeCart()">
+Fermer
+</button>
+
+</div>
+
+<footer>
+
+<p>
+© 2026 PUREGLOW - Tous droits réservés
+</p>
+
+</footer>
+
+<a href="https://wa.me/212698322466" class="whatsapp-btn" target="_blank">
+   WhatsApp
+</a>
+
+<!-- LIGHTBOX (image popup) -->
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img id="lightboxImg">
+</div>
+
+<script src="scriptn.js"></script>
+
+</body>
+</html>
