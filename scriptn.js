@@ -62,10 +62,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ADD TO CART BUTTONS
   document.querySelectorAll(".add-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      addToCart(btn.dataset.name, Number(btn.dataset.price));
-    });
+
+  btn.addEventListener("click", () => {
+
+    let name = btn.dataset.name;
+    let price = Number(btn.dataset.price);
+
+    const card = btn.closest(".card");
+    const select = card.querySelector(".color-select");
+
+    if(select){
+      name += " - " + select.value;
+    }
+
+    addToCart(name, price);
+
   });
+
+});
 
   // SEARCH
   document.getElementById("searchInput").addEventListener("keyup", function () {
@@ -237,7 +251,14 @@ window.changeSlide = function(name, direction) {
     slider.index = 0;
   }
 
-  document.getElementById(name).src = slider.images[slider.index];
+  const img = document.getElementById(name);
+img.src = slider.images[slider.index];
+
+const card = img.closest(".card");
+const select = card.querySelector(".color-select");
+
+if(select){
+  select.selectedIndex = slider.index;
 }
 
 });
