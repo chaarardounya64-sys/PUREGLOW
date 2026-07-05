@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       div.innerHTML = `
         <span>${item.name} - ${item.price} DH</span>
-        <button class="remove-btn" onclick="removeItem(${index})">❌</button>
+        <button class="remove-btn" onclick="removeItem(${index})">âŒ</button>
       `;
 
       div.style.display = "flex";
@@ -147,7 +147,7 @@ document.getElementById("orderBtn").addEventListener("click", () => {
     return;
   }
 
-  let message = "🌸 Bonjour PUREGLOW%0A%0A";
+  let message = "ðŸŒ¸ Bonjour PUREGLOW%0A%0A";
   message += "Je souhaite commander :%0A%0A";
 
   cart.forEach(item => {
@@ -156,7 +156,7 @@ document.getElementById("orderBtn").addEventListener("click", () => {
 
   message += `%0ATotal : ${total} DH%0A%0A`;
   message += "Nom : %0A";
-  message += "Téléphone : %0A";
+  message += "TÃ©lÃ©phone : %0A";
   message += "Ville : %0A";
   message += "Adresse : %0A";
 
@@ -176,7 +176,7 @@ document.getElementById("clearCartBtn").addEventListener("click", () => {
 
 });
 
-  // SPLASH SCREEN
+// SPLASH SCREEN
 window.addEventListener("load", () => {
 
   setTimeout(() => {
@@ -184,5 +184,60 @@ window.addEventListener("load", () => {
   }, 2000);
 
 });
+
+/* ===== Slider des sacs ===== */
+
+const sliders = {
+  elegant: {
+    images: [
+      "SacElegant1.png",
+      "SacElegant2.png",
+      "SacElegant3.png",
+      "SacElegant4.png",
+      "SacElegant5.png"
+    ],
+    index: 0
+  },
+
+  bandouliere: {
+    images: [
+      "SacBandouliere1.png",
+      "SacBandouliere2.png",
+      "SacBandouliere3.png",
+      "SacBandouliere4.png",
+      "SacBandouliere5.png",
+      "SacBandouliere6.png"
+    ],
+    index: 0
+  },
+
+  petit: {
+    images: [
+      "PetitSacaMain1.png",
+      "PetitSacaMain2.png",
+      "PetitSacaMain3.png",
+      "PetitSacaMain4.png",
+      "PetitSacaMain5.png",
+      "PetitSacaMain6.png"
+    ],
+    index: 0
+  }
+};
+
+window.changeSlide = function(name, direction) {
+  const slider = sliders[name];
+
+  slider.index += direction;
+
+  if (slider.index < 0) {
+    slider.index = slider.images.length - 1;
+  }
+
+  if (slider.index >= slider.images.length) {
+    slider.index = 0;
+  }
+
+  document.getElementById(name).src = slider.images[slider.index];
+}
 
 });
