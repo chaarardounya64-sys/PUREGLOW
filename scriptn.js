@@ -260,5 +260,32 @@ const select = card.querySelector(".color-select");
 if(select){
   select.selectedIndex = slider.index;
 }
+};
+
+document.querySelectorAll(".color-select").forEach(select => {
+
+  select.addEventListener("change", function() {
+
+    const card = this.closest(".card");
+    const img = card.querySelector("img");
+
+    if(img.id === "elegant"){
+      sliders.elegant.index = this.selectedIndex;
+      img.src = sliders.elegant.images[this.selectedIndex];
+    }
+
+    if(img.id === "bandouliere"){
+      sliders.bandouliere.index = this.selectedIndex;
+      img.src = sliders.bandouliere.images[this.selectedIndex];
+    }
+
+    if(img.id === "petit"){
+      sliders.petit.index = this.selectedIndex;
+      img.src = sliders.petit.images[this.selectedIndex];
+    }
+
+  });
+
+});
 
 });
